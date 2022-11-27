@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 //  Задача 1.1
@@ -9,7 +11,7 @@ public class Main {
         float totalAmount = 0f;
         int deposit = 15_000;
         int targetAmount = 2_459_000;
-        int percent = 12; // процентов годовых
+        int percent = 12; // процентов годовых (продолжение задачи из предыдущего урока)
 
         int month = 0;
         while (totalAmount < targetAmount) {
@@ -52,8 +54,9 @@ public class Main {
 
         for (i = 1; i <= period; i++) {
             population = population + (population * birthRate / 1000) - (population * deathRate / 1000);
-            System.out.println("Год " + i + " - численность населения составляет " + population + " человек.\n");
+            System.out.println("Год " + i + " - численность населения составляет " + population + " человек.");
         }
+        System.out.println();
 
 //  Задача 2.1
 //  Напишите программу, которая выводит в консоль сумму накоплений.
@@ -96,7 +99,7 @@ public class Main {
 //  Напишите программу, которая будет выводить Василию сумму его накоплений за следующие каждые полгода в течение 9 лет.
         System.out.println("Задача 2.3");
         bankDeposit = 15_000;
-        int depositPeriod = 5;
+        int depositPeriod = 9;
         int depositPeriodInMonths = depositPeriod * 12;
 
         for (i = 1; i <= depositPeriodInMonths; i++) {
@@ -115,6 +118,50 @@ public class Main {
 //  "Сегодня пятница, ...-е число. Необходимо подготовить отчет."
 //  В нашем месяце 31 день. В результате у вас должно вывестись от 4 до 5 сообщений с напоминаниями по разным датам.
         System.out.println("Задача 2.4");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите число, соответствующее первой пятнице месяца: ");
+        int firstFriday = scanner.nextInt();
+        for (int k = firstFriday; k <= 31; k+=7) {
+            if (firstFriday > 0 && firstFriday <= 7) {
+                System.out.printf("Сегодня пятница, %s-е число. Необходимо подготовить отчет.\n", k);
+            } else {
+                System.out.println("Введите корректное число.");
+                break;
+            }
+        } System.out.println();
 
+//  Задача 3.1
+//  Мы решили написать астрономическое приложение, которое считает, когда над Землей пролетают кометы и их можно будет увидеть.
+//  Для начала нам нужно посчитать траекторию движения кометы, которая пролетает рядом с Землей каждый 79-й год, начиная с нулевого.
+//  Нам нужно узнать, в каких годах комета пролетала рядом с Землей за последние 200 лет и когда мы увидим ее в следующий раз.
+//  В консоль нужно вывести все годы за последние 200 лет, когда появлялась комета, а также следующий год ее появления.
+//  Для вычисления периода можно создать две дополнительные переменные, которые содержат год за 200 лет до текущего
+//  (из созданной ранее переменной) в качестве старта и 100 лет после в качестве завершения периода расчета.
+        System.out.println("Задача 3.1");
+        int cometYear = 0;
+        int cometPeriod = 79;
+        int currentYear = LocalDate.now().getYear();
+        int startPeriod = currentYear - 200;
+        int endPeriod = currentYear + 100;
+
+        while (cometYear < endPeriod) {
+            cometYear += cometPeriod;
+            for (int j = startPeriod; j <= endPeriod; j++) {
+                if (j == cometYear && j <= currentYear) {
+                    System.out.println("Комета пролетала рядом с Землей в " + j + " году.");
+                } else if (j == cometYear && j > currentYear) {
+                    System.out.println("В следующий раз комета пролетит рядом с Землей в " + j + " году.");
+                }
+            }
+        }
+        System.out.println();
+
+//  Задача 3.2
+//  Напишите программу, которая выводит в консоль таблицу умножения на 2.
+        System.out.println("Задача 3.2");
+        int multiplier = 2;
+        for (int l = 1; l <= 10; l++) {
+            System.out.println(l + " * " + multiplier + " = " + (l * multiplier));
+        }
     }
 }
